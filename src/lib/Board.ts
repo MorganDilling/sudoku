@@ -1,20 +1,9 @@
 import Instance from './Instance';
 import Coordinate from './Coordinate';
 import Cell from './Cell';
+import { clone, addItem, removeItem } from './ArrayEdit';
 
 const BOARD_SIZE = 9;
-
-const clone = <T>(array: T[]): T[] => [...array];
-const removeItem = <T>(array: T[], idx: number): T[] => [
-  ...clone(array).splice(0, idx),
-  ...clone(array).splice(idx + 1),
-];
-const addItem = <T>(array: T[], idx: number, item: T): T[] => [
-  ...clone(array).splice(0, idx),
-  item,
-  ...clone(array).splice(idx),
-];
-
 export default class SudokuBoard extends Instance {
   private _board: Cell[];
 
