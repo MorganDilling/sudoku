@@ -33,8 +33,9 @@ export default class SudokuBoard extends Instance {
   }
 
   fetchCell(row: number, col: number) {
+    const cellCoordinate = new Coordinate(row, col);
     const cell = this._board.find((cell) =>
-      cell.coordinate.equals(new Coordinate(row, col))
+      cell.coordinate.equals(cellCoordinate)
     );
 
     let index;
