@@ -17,7 +17,7 @@ export default class Instance {
         };
       },
       fire: (...args: any[]) => {
-        this._onChanged.forEach((callback) => callback(args));
+        this._onChanged.forEach((callback) => setTimeout(()=>callback(...args),0));
       },
     };
   }
