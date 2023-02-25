@@ -94,8 +94,6 @@ export default class SudokuBoard extends Instance {
     tempBoard = addItem(tempBoard, index || 0, newCell);
     this._board = clone(tempBoard);
 
-    const { cell: newCellFetch } = this.fetchCell(row, col);
-
     this.onChanged.fire(new Coordinate(row, col), num);
   }
 }
