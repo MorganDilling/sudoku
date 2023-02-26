@@ -1,29 +1,23 @@
 export default class Instance {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private _onChanged: ((...args: any[]) => void)[];
+  private _onChanged: ((...args: unknown[]) => void)[];
   onChanged: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    connect: (callback: (...args: any[]) => void) => () => void;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    fire: (...args: any[]) => void;
+    connect: (callback: (...args: unknown[]) => void) => () => void;
+    fire: (...args: unknown[]) => void;
   };
 
   constructor() {
     this._onChanged = [];
     this.onChanged = {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      connect: (callback: (...args: any[]) => void) => {
+      connect: (callback: (...args: unknown[]) => void) => {
         let active = true;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const wrappedCallback = (...args: any[]) =>
+        const wrappedCallback = (...args: unknown[]) =>
           active ? callback(...args) : undefined;
 
         this._onChanged.push(wrappedCallback);
 
         return () => (active = false);
       },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      fire: (...args: any[]) => {
+      fire: (...args: unknown[]) => {
         this._onChanged.forEach((callback) =>
           setTimeout(() => callback(...args), 0)
         );
