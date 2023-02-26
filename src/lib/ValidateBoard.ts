@@ -1,6 +1,5 @@
 import Cell from './Cell';
 import SudokuBoard from './Board';
-import { BOARD_SIZE } from './Board';
 
 const validateSection = (section: Cell[]) => {
   const values = section.map((cell) => cell.value);
@@ -11,7 +10,7 @@ const validateSection = (section: Cell[]) => {
 export default (board: SudokuBoard) => {
   let valid = true;
 
-  for (let i = 0; i < BOARD_SIZE; i++) {
+  for (let i = 0; i < SudokuBoard.BOARD_SIZE; i++) {
     const row = board.row(i);
     const col = board.col(i);
     const square = board.fetchCellsInSquare(i, i);
