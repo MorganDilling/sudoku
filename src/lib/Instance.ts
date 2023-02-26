@@ -13,12 +13,14 @@ export default class Instance {
     this.onChanged = {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       connect: (callback: (...args: any[]) => void) => {
-        const length = this._onChanged.length;
-        this._onChanged.push(callback);
+        let active = true;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const wrappedCallback = (...args: any[]) =>
+          active ? callback(...args) : undefined;
 
-        return () => {
-          this._onChanged.splice(length, 1);
-        };
+        this._onChanged.push(wrappedCallback);
+
+        return () => (active = false);
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       fire: (...args: any[]) => {
