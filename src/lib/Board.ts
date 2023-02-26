@@ -6,10 +6,12 @@ import { clone, addItem, removeItem } from './ArrayEdit';
 const BOARD_SIZE = 9;
 export default class SudokuBoard extends Instance {
   private _board: Cell[];
+  private _displayCache: string | null;
 
   constructor() {
     super();
     this._board = [];
+    this._displayCache = null;
 
     // Initialize the board with 0s
     for (let i = 0; i < BOARD_SIZE; i++) {
@@ -58,6 +60,10 @@ export default class SudokuBoard extends Instance {
   }
 
   get display() {
+    if (this._displayCache) {
+      return this._displayCache;
+    }
+
     let display = '';
 
     for (let i = 0; i < BOARD_SIZE; i++) {
@@ -77,6 +83,7 @@ export default class SudokuBoard extends Instance {
       }
     }
 
+    this._displayCache = display;
     return display;
   }
 
@@ -95,5 +102,7 @@ export default class SudokuBoard extends Instance {
     this._board = clone(tempBoard);
 
     this.onChanged.fire(new Coordinate(row, col), num);
+
+    this._displayCache = null;
   }
 }
