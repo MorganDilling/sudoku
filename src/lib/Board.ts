@@ -3,7 +3,7 @@ import Coordinate from './Coordinate';
 import Cell from './Cell';
 import { clone, addItem, removeItem } from './ArrayEdit';
 
-const BOARD_SIZE = 9;
+export const BOARD_SIZE = 9;
 export default class SudokuBoard extends Instance {
   private _board: Cell[];
   private _displayCache: string | null;
@@ -21,14 +21,17 @@ export default class SudokuBoard extends Instance {
     }
   }
 
-  fetchCellsInSquare(row: number, col: number) {
+  fetchCellsInSquare(row: number, col: number): Cell[] {
     const squareRow = Math.floor(row / 3);
     const squareCol = Math.floor(col / 3);
 
     const cells = [];
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        cells.push(this.fetchCell(squareRow * 3 + i, squareCol * 3 + j).cell);
+        const cell = this.fetchCell(squareRow * 3 + i, squareCol * 3 + j).cell;
+        if (cell) {
+          cells.push(cell);
+        }
       }
     }
     return cells;
