@@ -17,7 +17,7 @@ export default class Cell extends Instance {
 
   set coordinate(coordinate: Coordinate) {
     this._coordinate = coordinate;
-    this.onChanged.fire();
+    this.onChanged.fire(coordinate,'coordinate'); // 2nd arg specifies what changed
   }
 
   get value() {
