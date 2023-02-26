@@ -29,9 +29,8 @@ export default class SudokuBoard extends Instance {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         const cell = this.fetchCell(squareRow * 3 + i, squareCol * 3 + j).cell;
-        if (cell) {
+        if (cell)
           cells.push(cell);
-        }
       }
     }
     return cells;
