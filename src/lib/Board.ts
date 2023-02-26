@@ -11,7 +11,7 @@ export default class SudokuBoard extends Instance {
   constructor() {
     super();
     this._board = [];
-    delete _displayCache;
+    this._displayCache = null;
 
     // Initialize the board with 0s
     for (let i = 0; i < BOARD_SIZE; i++) {
