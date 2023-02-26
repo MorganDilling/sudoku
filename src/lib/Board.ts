@@ -73,7 +73,7 @@ export default class SudokuBoard extends Instance {
         const cell = this.fetchCell(i, j).cell;
 
         if (cell) {
-          display += cell.value + ' ';
+          display += (cell.value === 0 ? '_' : cell.value) + ' ';
         }
         if (j === 2 || j === 5) {
           display += '| ';
@@ -106,5 +106,16 @@ export default class SudokuBoard extends Instance {
     this.onChanged.fire(new Coordinate(row, col), num);
 
     this._displayCache = null;
+  }
+
+  equals(board: SudokuBoard) {
+    return this._board.every((cell, index) => {
+      const otherCell = board.board[index];
+
+      return (
+        cell.coordinate.equals(otherCell.coordinate) &&
+        cell.value === otherCell.value
+      );
+    });
   }
 }
