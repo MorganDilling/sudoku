@@ -17,9 +17,9 @@ export default (board: SudokuBoard) => {
     const square = board.fetchCellsInSquare(i, i);
 
     if (
-      !validateSection(row) ||
-      !validateSection(col) ||
-      !validateSection(square)
+      [row, col, square]
+        .filter(item=>!validateSelection(item))
+        .length !== 0 // '> 0' also works but this is more optimized
     ) {
       valid = false;
       break;
