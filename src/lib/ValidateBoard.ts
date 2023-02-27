@@ -1,13 +1,13 @@
 import Cell from './Cell';
 import SudokuBoard from './Board';
 
-const validateSection = (section: Cell[]) => {
+export const validateSection = (section: Cell[]) => {
   const values = section.map((cell) => cell.value);
   const uniqueValues = new Set(values);
   return values.length === uniqueValues.size;
 };
 
-export default (board: SudokuBoard) => {
+export const validateBoard = (board: SudokuBoard) => {
   let valid = true;
 
   for (let i = 0; i < SudokuBoard.BOARD_SIZE; i++) {
