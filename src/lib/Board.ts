@@ -37,7 +37,7 @@ export default class SudokuBoard extends Instance {
   }
 
   fetchCell(row: number, col: number) {
-    const cellCoordinate = new Coordinate(row, col);
+    const cellCoordinate = new Coordinate(col, row);
     const cell = this._board.find((cell) =>
       cell.coordinate.equals(cellCoordinate)
     );
@@ -98,12 +98,12 @@ export default class SudokuBoard extends Instance {
       tempBoard = removeItem(tempBoard, index);
     }
 
-    const newCell = new Cell(new Coordinate(row, col), num);
+    const newCell = new Cell(new Coordinate(col, row), num);
 
     tempBoard = addItem(tempBoard, index || 0, newCell);
     this._board = clone(tempBoard);
 
-    this.onChanged.fire(new Coordinate(row, col), num);
+    this.onChanged.fire(new Coordinate(col, row), num);
 
     this._displayCache = null;
   }
